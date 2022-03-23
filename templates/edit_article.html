@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <div class="card card-body">
+            <form action="/update_article/{{article_data.id}}" method="POST">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="magazine-id" placeholder="Magazine ID"
+                           value="{{article_data.magazines_id}}" readonly>
+
+                    <select id="magazines" class="form-control">
+                        {% for row in list_magazines %}
+                        <option value="{{row[0]}}">{{row[0]}} - {{row[1]}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" name="arttype-id" placeholder="Article Type ID"
+                           value="{{article_data.article_type_id}}" readonly>
+
+                    <select id="arttypes" class="form-control">
+                        {% for row in list_article_types %}
+                        <option value="{{row[0]}}">{{row[0]}} - {{row[1]}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" name="author-id" placeholder="Author ID" readonly
+                           value="{{article_data.author_id}}" readonly>
+
+                    <select id="authors" class="form-control">
+                        {% for row in list_author %}
+                        <option value="{{row[0]}}">{{row[0]}} - {{row[1]}}</option>
+                        {% endfor %}
+                    </select>
+
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">
+                        Update
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('select#magazines').on('change', function () {
+        $('input[name="magazine-id"]').val(this.value);
+    });
+    $('select#arttypes').on('change', function () {
+        $('input[name="arttype-id"]').val(this.value);
+    });
+    $('select#authors').on('change', function () {
+        $('input[name="author-id"]').val(this.value);
+    });
+</script>
+
+{% endblock %}
